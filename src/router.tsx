@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
         element: <OpenIssues />,
       },
       {
-        path: "close",
+        path: "closed",
         element: <ClosedIssues />,
       },
     ],

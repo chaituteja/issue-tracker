@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { NavLink, Outlet } from "react-router";
 
 export default function Layout() {
+  const [isDark, setIsDark] = useState(() => {
+    const theme = localStorage.getItem("theme");
+    return theme === "dark";
+  });
+
+  function toggleTheme() {
+    setIsDark(!isDark);
+  }
+
   return (
     <>
       <header className="p-6 sm:p-10 border-b border-gray-300 dark:border-gray-700">
