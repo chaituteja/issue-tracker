@@ -61,7 +61,7 @@ export default function AllIssues() {
     setIssues(sortIssues(updatedIssues));
   }
 
-  function deleteIssue(id) {
+  function deleteIssue(id: string) {
     const updatedIssues = issues.filter((issue) => issue.id !== id);
     saveIssues(updatedIssues);
     setIssues(sortIssues(updatedIssues));
@@ -76,6 +76,7 @@ export default function AllIssues() {
             Title
           </label>
           <input
+            id="title"
             type="text"
             name="title"
             className="w-full px-3 py-2 border border-slate-400 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800"
@@ -90,6 +91,7 @@ export default function AllIssues() {
             Description
           </label>
           <textarea
+            id="description"
             name="description"
             className="w-full px-3 py-2 border border-slate-400 dark:border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white dark:bg-gray-800"
             rows={3}
@@ -101,7 +103,7 @@ export default function AllIssues() {
 
         <button
           type="submit"
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          className="cursor-pointer px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
         >
           Add Issue
         </button>

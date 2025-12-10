@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useLocation } from "react-router";
+import ViewModal from "./ViewModal";
 
 interface Issue {
   id: string;
@@ -17,6 +19,7 @@ interface IssueCardProps {
 
 export default function IssueCard({ issue, onDelete }: IssueCardProps) {
   const location = useLocation();
+  const [showViewModal, setShowViewModal] = useState(false);
   const isAllIssuesPage = location.pathname === "/";
 
   function truncatedDescription(desc: string, maxLength = 50) {
@@ -55,20 +58,27 @@ export default function IssueCard({ issue, onDelete }: IssueCardProps) {
         <div className="flex gap-2 flex-wrap">
           <button
             onClick={() => onDelete(issue.id)}
-            className="px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-700 transition-colors"
+            className="cursor-pointer px-3 py-1 bg-purple-500 text-white rounded hover:bg-purple-700 transition-colors"
           >
             Delete
           </button>
           {isAllIssuesPage && issue.description.length > 50 && (
             <button
-              //onClick={() => setShowViewModal(true)}
-              className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+              onClick={() => setShowViewModal(true)}
+              className="cursor-pointer px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
             >
               View
             </button>
           )}
         </div>
       </div>
+      {showViewModal && (
+        <ViewModal
+          title={issue.title}
+          desc={issue.description}
+          onClose={() => setShowViewModal(false)}
+        />
+      )}
     </>
   );
 }
