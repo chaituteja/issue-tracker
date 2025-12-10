@@ -1,5 +1,8 @@
 import { createBrowserRouter } from "react-router";
 import Layout from "./components/Layout";
+import AllIssues from "./pages/AllIssues";
+import OpenIssues from "./pages/OpenIssues";
+import ClosedIssues from "./pages/ClosedIssues";
 
 export const router = createBrowserRouter([
   {
@@ -8,6 +11,15 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <AllIssues />,
+      },
+      {
+        path: "open",
+        element: <OpenIssues />,
+      },
+      {
+        path: "close",
+        element: <ClosedIssues />,
       },
     ],
   },
