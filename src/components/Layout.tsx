@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { NavLink, Outlet } from "react-router";
+import { NavLink, Outlet, useLocation } from "react-router";
 
 export default function Layout() {
+  const location = useLocation();
   const [isDark, setIsDark] = useState(() => {
     const theme = localStorage.getItem("theme");
     return theme === "dark";
@@ -19,7 +20,17 @@ export default function Layout() {
       document.documentElement.classList.remove("dark");
       localStorage.setItem("theme", "light");
     }
-  });
+  }, [isDark]);
+
+  useEffect(() => {
+    const titles: Record<string, string> = {
+      "/": "All Issues",
+      "/open": "Open Issues",
+      "/closed": "Closed Issues",
+    };
+
+    document.title = titles[location.pathname] || "Issue Tracker App";
+  }, [location.pathname]);
 
   return (
     <>
